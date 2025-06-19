@@ -6,6 +6,13 @@ import com.petconnect.registration.dto.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/register")
 public class RegistrationController {
@@ -24,5 +31,14 @@ public class RegistrationController {
 
     // Llamar al servicio
     return registrationService.registerUser(userRegistration);
+  }
+
+  // Manejo de excepción si el email ya existe
+  @ExceptionHandler(IllegalArgumentException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public Map<String, String> handleIllegalArgument(IllegalArgumentException ex) {
+    Map<String, String> error = new HashMap<>();
+    error.put("error", ex.getMessage());
+    return error;
   }
 }

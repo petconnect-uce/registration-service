@@ -52,6 +52,12 @@
 
 
 
+		<!-- Spring Security (para usar PasswordEncoder / BCrypt) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.mysql</groupId>
