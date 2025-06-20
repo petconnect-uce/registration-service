@@ -1,20 +1,12 @@
-package com.petconnect.registration.dto;
-
-import jakarta.validation.constraints.*;
+package com.petconnect.registration_service.dto;
 
 public class UserRegistrationRequest {
-
-  @NotBlank
   private String fullName;
-
-  @Email
-  @NotBlank
   private String email;
-
-  @Size(min = 8)
   private String password;
 
   // Getters y Setters
+
   public String getFullName() {
     return fullName;
   }

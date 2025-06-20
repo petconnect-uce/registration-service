@@ -1,8 +1,11 @@
-package com.petconnect.registration.repository;
+package com.petconnect.registration_service.repository;
 
-import com.petconnect.registration.model.User;
+import com.petconnect.registration_service.model.UserRegistration;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-  boolean existsByEmail(String email);
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<UserRegistration, Long> {
+
+    Optional<UserRegistration> findByEmail(String email);
 }

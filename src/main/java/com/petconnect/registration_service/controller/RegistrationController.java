@@ -2,7 +2,8 @@ package com.petconnect.registration_service.controller;
 
 import com.petconnect.registration_service.model.UserRegistration;
 import com.petconnect.registration_service.service.UserRegistrationService;
-import com.petconnect.registration.dto.UserRegistrationRequest;
+import com.petconnect.registration_service.dto.UserRegistrationRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,11 +35,12 @@ public class RegistrationController {
   }
 
   // Manejo de excepción si el email ya existe
-  @ExceptionHandler(IllegalArgumentException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public Map<String, String> handleIllegalArgument(IllegalArgumentException ex) {
-    Map<String, String> error = new HashMap<>();
-    error.put("error", ex.getMessage());
-    return error;
-  }
+  // @ExceptionHandler(IllegalArgumentException.class)
+  // @ResponseStatus(HttpStatus.BAD_REQUEST)
+  // public Map<String, String> handleIllegalArgument(IllegalArgumentException ex)
+  // {
+  // Map<String, String> error = new HashMap<>();
+  // error.put("error", ex.getMessage());
+  // return error;
+  // }
 }
