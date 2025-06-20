@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +25,7 @@ public class RegistrationController {
   @Autowired
   private UserRegistrationService registrationService;
 
+  // Endpoint para registrar usuario (abierto)
   @PostMapping(consumes = "application/json", produces = "application/json")
   public UserRegistration registerUser(@RequestBody UserRegistrationRequest request) {
 
@@ -34,13 +39,13 @@ public class RegistrationController {
     return registrationService.registerUser(userRegistration);
   }
 
-  // Manejo de excepción si el email ya existe
-  // @ExceptionHandler(IllegalArgumentException.class)
-  // @ResponseStatus(HttpStatus.BAD_REQUEST)
-  // public Map<String, String> handleIllegalArgument(IllegalArgumentException ex)
-  // {
-  // Map<String, String> error = new HashMap<>();
-  // error.put("error", ex.getMessage());
-  // return error;
-  // }
+  // Endpoint protegido con JWT para probar autenticación
+  @GetMapping("/test-protected")
+  public ResponseEntity<?> testProtected(@AuthenticationPrincipal UserDetails userDetails) {
+    Map<String, Object> response = new HashMap<>();
+    response.put("message", "Acceso permitido al endpoint protegido!");
+    response.put("user", userDetails != null ? userDetails.getUsername() : "desconocido");
+
+    return ResponseEntity.ok(response);
+  }
 }
