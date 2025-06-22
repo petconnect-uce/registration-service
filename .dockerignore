@@ -1,0 +1,9 @@
+
+*.log
+*.iml
+.idea
+.vscode
+*.md
+*.yml
+docker-compose.yml
+Dockerfile
