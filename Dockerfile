@@ -1,9 +1,14 @@
-FROM openjdk:21-jdk-slim
+# Imagen base de OpenJDK 21 con JDK
+FROM eclipse-temurin:21-jdk
 
-ARG JAR_FILE=target/registration-service-0.0.1-SNAPSHOT.jar
+# Directorio de trabajo en el contenedor
+WORKDIR /app
 
-COPY ${JAR_FILE} app.jar
+# Copiar el jar de la aplicación
+COPY target/registration-service-0.0.1-SNAPSHOT.jar app.jar
 
-EXPOSE 3002
+# Puerto expuesto
+EXPOSE 8082
 
+# Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "app.jar"]
