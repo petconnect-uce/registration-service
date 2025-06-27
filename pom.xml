@@ -116,6 +116,7 @@
     </dependencies>
 
     <build>
+        <finalName>registration-service-0.0.1-SNAPSHOT</finalName>
         <plugins>
             <!-- Spring Boot Maven Plugin -->
             <plugin>

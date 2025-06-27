@@ -28,14 +28,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable() // Desactivar CSRF
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // JWT no usa sesión
-                .and()
-                .authorizeHttpRequests()
-                .requestMatchers("/register").permitAll() // Public endpoint para registro
-                .requestMatchers("/register/test-protected").authenticated() // Protegido
-                .anyRequest().permitAll() // Todo lo demás permitido
-                .and()
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/register/test-protected").authenticated()
+                        .anyRequest().permitAll())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -46,7 +44,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Para inyectar AuthenticationManager si en el futuro lo necesitas
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
