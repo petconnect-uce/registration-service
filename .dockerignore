@@ -7,3 +7,12 @@
 *.yml
 docker-compose.yml
 Dockerfile
+
+target
+.git
+
+.idea
+README.md
+.gitignore
+
+.dockerignore
