@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRegistration {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,4 +21,7 @@ public class UserRegistration {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = true)
+    private String role;
 }
