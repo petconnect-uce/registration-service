@@ -1,3 +1,4 @@
+
 package com.petconnect.registration_service.controller;
 
 import com.petconnect.registration_service.model.UserRegistration;
@@ -9,13 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/api/v1/registration")
+@CrossOrigin(origins = "*", methods = { RequestMethod.POST, RequestMethod.OPTIONS })
 public class RegistrationController {
 
   @Autowired
   private UserRegistrationService registrationService;
 
-  @PostMapping(consumes = "application/json", produces = "application/json")
+  @PostMapping(value = "/register", consumes = "application/json", produces = "application/json") // <--- Añadido el
+                                                                                                  // path
   public ResponseEntity<?> registerUser(@RequestBody UserRegistrationRequest request) {
     if (request.getEmail() == null || request.getPassword() == null || request.getFullName() == null) {
       return ResponseEntity.badRequest().body("Missing required fields");

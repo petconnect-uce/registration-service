@@ -1,7 +1,5 @@
 server:
   port: 8082
-  servlet:
-    context-path: /api/registration
 
 spring:
   datasource:
@@ -21,4 +19,4 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 jwt:
-  secret: supersecreto123diegopetconnect456 # Usa aquí la misma clave que en AUTH-SERVICE
+  secret: supersecreto123diegopetconnect456

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.http.HttpMethod;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 
@@ -31,8 +33,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register").permitAll()
-                        .requestMatchers("/register/test-protected").authenticated()
+                        .requestMatchers(HttpMethod.OPTIONS, "/register/**").permitAll() // Permite OPTIONS para CORS
+                                                                                         // preflight
+                        .requestMatchers("/api/v1/registration/register").permitAll()
+                        .requestMatchers("/api/v1/registration/test-protected").authenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

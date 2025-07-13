@@ -13,5 +13,4 @@ Dockerfile
 .idea
 README.md
 .gitignore
-
 .dockerignore
